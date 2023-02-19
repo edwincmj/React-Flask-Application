@@ -7,7 +7,6 @@ verify_ssl = true
 
 [packages]
 flask = "*"
-sqlalchemy = "*"
 flask-sqlalchemy = "*"
 flask-cors = "*"
 Flask-JWT-Extended = "*"
@@ -17,6 +16,7 @@ mysqlclient = "*"
 pyenv-win = "*"
 mysql-connector-python = "*"
 python-dotenv = "*"
+sqlalchemy = "*"
 
 [requires]
 python_version = "3.9.6"
