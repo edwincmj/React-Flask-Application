@@ -42,7 +42,7 @@ def login():
             return jsonify(
                 {
                     "code": 404,
-                    "message": "User not found."
+                    "message": "User and password incorrect."
                 }
             ), 404
 
