@@ -8,6 +8,11 @@ import { useEffect, useState } from "react";
 const Home = () => {
   const auth = useAuth();
   const [config, setConfig] = useState({});
+  const [transactionForm,setTransactionForm] = useState(false);
+  const [debitCurrency, setDebitCurrency] = useState(0)
+  const [creditCurrency, setCreditCurrency] = useState(0)
+  const [debitAmount, setDebitAmount] = useState('')
+  const [creditAmount, setCreditAmount] = useState('')
 
   useEffect(() => {
     if (auth.user !== null) {
@@ -21,19 +26,12 @@ const Home = () => {
     }
   }, []);
 
-  //post request
-  // if user is logged in, get token and set authorization headers with token.
-  // This is to call protected API endpoint that requires user authentication
-  // var config = {}
-  // if(auth.user !== null){
-  //     const bearer_token = `Bearer ${auth.user.token}`
-  //     config = {
-  //         headers:{
-  //             Authorization: bearer_token
-  //         }
-  //       };
+  function calculateCreditAmount(value){
+    setDebitAmount(value)
+    setCreditAmount(debitAmount/document.getElementById(debitCurrency).getAttribute('rate')*document.getElementById(creditCurrency).getAttribute('rate'))
+  }
 
-  // }
+  //post request
   async function getTransactions() {
     try {
       const response = await axios.post(hosturl + "/transaction/user", {
@@ -41,7 +39,7 @@ const Home = () => {
       });
       console.log(response.data);
       var Table = `
-        <table className='table table-sm table-dark table-striped'>
+        <table class='table table-sm table-dark table-striped'>
           <thead>
             <tr>`;
       console.log(Table)
@@ -74,11 +72,59 @@ const Home = () => {
     }
   }
 
+  //post request
+  async function toggleTransaction() {
+    if (!transactionForm){
+      setTransactionForm(true)
+      document.getElementById('header').innerText='Create Transaction'
+      // var form = `
+      // <form>
+      //   <div class="form-row">
+      //     <div class="form-group col-md-6">
+      //       <label for="inputEmail4" class='text-left'>Debit Currency</label>
+      //       <select id="inputDebitCurrency" class="form-control">
+      //       </select>
+      //     </div>
+      //     <div class="form-group col-md-6">
+      //       <label for="inputEmail4" class='text-left'>Debit Amount</label>
+      //       <input type="number" class="form-control" id="debitAmount" onChange={e => setDebitAmount(e.target.value)} >
+      //     </div>
+      //   </div>
+      //   <div class="form-group col-md-6">
+      //     <label for="inputAddress">Credit Currency</label>
+      //     <select id="inputCreditCurrency" class="form-control">
+      //     </select>
+      //   </div>
+      //   <div class="form-group col-md-6"">
+      //     <label for="inputAddress2">Credit Amount</label>
+      //     <input type="text"  class='form-control' readonly>
+      //   </div>
+      //   <button type="submit" class="btn btn-primary">Create Transaction</button>
+      // </form>`
+      // document.getElementById('displayResult').innerHTML = form
+      var rates = await getExchangeRate()
+      var options = `<option disabled selected value> -- select an option -- </option>`
+      for (let i=0; i<rates.data.length;i++){
+        options+=`
+        <option id='${rates.data[i].exchange_currency}' rate='${rates.data[i].rate}'>${rates.data[i].exchange_currency}</option>`
+      }
+      console.log(options)
+      document.getElementById('inputDebitCurrency').innerHTML = options
+      document.getElementById('inputCreditCurrency').innerHTML= options
+
+    }
+    else{
+      setTransactionForm(false)
+    }
+
+  }
+
   // get request
   async function getExchangeRate() {
     try {
       const response = await axios.get(hosturl + "/exchange_rate");
       console.log(response.data);
+      return response.data
     } catch (error) {
       console.error(error.response.data);
     }
@@ -165,14 +211,13 @@ const Home = () => {
                       <span>Get Exchange Rate</span>
                     </button>
                   </div>
-                  {/* <div className="mb-3 d-grid">
+                  <div className="mb-3 d-grid">
                     <button
                       className="btn btn-primary"
-                      onClick={getTransactions}
-                    >
-                      <span>Show transaction</span>
+                      onClick={toggleTransaction}>
+                      <span>Create transaction</span>
                     </button>
-                  </div> */}
+                  </div>
 
                   <div className="mb-3 d-grid">
                     <button className="btn btn-primary" onClick={createNewUser}>
@@ -208,10 +253,38 @@ const Home = () => {
             </div>
           </div>
           <div className="container">
-            <div class="card">
-              <h5 class="card-header" id='header'>Featured</h5>
-              <div class="card-body" id='displayResult'>
-
+            <div className="card w-auto scroll">
+              <h5 className="card-header w-auto" id='header'>Featured</h5>
+              <div className="card-body" id='displayResult'>
+              {transactionForm ? (
+                    <div>
+                      <form>
+                      <div className="form-row">
+                          <div className="form-group col-md-6">
+                            <label className='text-left'>Debit Currency</label>
+                            <select id="inputDebitCurrency" className="form-control" value={debitCurrency} onChange={e => setDebitCurrency(e.target.value)}>
+                            </select>
+                          </div>
+                          <div className="form-group col-md-6">
+                            <label  className='text-left'>Debit Amount</label>
+                            <input type="number" className="form-control" id="debitAmount" onChange={e => calculateCreditAmount(e.target.value)} />
+                          </div>
+                        </div>
+                        <div className="form-group col-md-6">
+                          <label >Credit Currency</label>
+                          <select id="inputCreditCurrency" className="form-control" onChange={e => setCreditCurrency(e.target.value)}>
+                          </select>
+                        </div>
+                        <div className="form-group col-md-6">
+                          <label >Credit Amount</label>
+                          <input type="text"  className='form-control' readOnly value={creditAmount} onChange={e => setCreditAmount(e.target.value)} />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Create Transaction</button>
+                      </form>
+                    </div>
+                  )
+                    :(<div></div>)
+                  }
               </div>
             </div>
           </div>
