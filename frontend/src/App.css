@@ -47,3 +47,8 @@
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+
+.scroll {
+  /* max-height: 100px; */
+  overflow-x: auto;
+}
