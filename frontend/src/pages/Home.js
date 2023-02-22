@@ -144,6 +144,14 @@ const Home = () => {
                       <span>Show transaction</span>
                     </button>
                   </div>
+                  {/* <div className="mb-3 d-grid">
+                    <button
+                      className="btn btn-primary"
+                      onClick={getTransactions}
+                    >
+                      <span>Show transaction</span>
+                    </button>
+                  </div> */}
                   <div className="mb-3 d-grid">
                     <button
                       className="btn btn-primary"
@@ -152,13 +160,28 @@ const Home = () => {
                       <span>Get Exchange Rate</span>
                     </button>
                   </div>
+                  {/* <div className="mb-3 d-grid">
+                    <button
+                      className="btn btn-primary"
+                      onClick={getTransactions}
+                    >
+                      <span>Show transaction</span>
+                    </button>
+                  </div> */}
 
                   <div className="mb-3 d-grid">
                     <button className="btn btn-primary" onClick={createNewUser}>
                       <span>Create New User</span>
                     </button>
                   </div>
-
+                  {/* <div className="mb-3 d-grid">
+                    <button
+                      className="btn btn-primary"
+                      onClick={getTransactions}
+                    >
+                      <span>Show transaction</span>
+                    </button>
+                  </div> */}
                   <div className="mb-3 d-grid">
                     <button className="btn btn-primary" onClick={deleteUser}>
                       <span>Delete User</span>
