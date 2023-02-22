@@ -154,7 +154,7 @@ const Home = () => {
                       className="btn btn-primary"
                       onClick={getTransactions}
                     >
-                      <span>Show transaction</span>
+                      <span>Show transactions</span>
                     </button>
                   </div>
                   <div className="mb-3 d-grid">
@@ -165,6 +165,14 @@ const Home = () => {
                       <span>Get Exchange Rate</span>
                     </button>
                   </div>
+                  {/* <div className="mb-3 d-grid">
+                    <button
+                      className="btn btn-primary"
+                      onClick={getTransactions}
+                    >
+                      <span>Show transaction</span>
+                    </button>
+                  </div> */}
 
                   <div className="mb-3 d-grid">
                     <button className="btn btn-primary" onClick={createNewUser}>
@@ -186,6 +194,15 @@ const Home = () => {
                       <span>Get Protected Route</span>
                     </button>
                   </div>
+
+                  {/* <div className="mb-3 d-grid">
+                    <button
+                      className="btn btn-primary"
+                      onClick={getTransactions}
+                    >
+                      <span>Show transaction</span>
+                    </button>
+                  </div> */}
                 </div>
               </div>
             </div>
