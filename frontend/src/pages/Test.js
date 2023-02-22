@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { useAuth } from "../contexts/authContext";
+import { useAuth } from "../contexts/authContext.js";
 import { Navigate } from "react-router-dom";
 
 const Test = () => {
@@ -8,7 +8,7 @@ const Test = () => {
 
   useEffect(() => {
     console.log(auth.user);
-  }, []);
+  });
 
   const dosmth = (e) => {
     e.preventDefault();
@@ -16,8 +16,14 @@ const Test = () => {
   };
   return (
     <>
-      <div>Test</div>
-      <button onClick={dosmth}>click here</button>
+      {/* {!auth.user ? (
+        <Navigate replace to="/login" />
+      ) : ( */}
+        <>
+          <div>Test</div>
+          <button onClick={dosmth}>click here</button>
+        </>
+      {/* )} */}
     </>
   );
 };
