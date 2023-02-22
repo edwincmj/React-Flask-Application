@@ -40,34 +40,34 @@ const Home = () => {
         token: auth.user.token,
       });
       console.log(response.data);
-      var table = `
+      var Table = `
         <table className='table table-sm table-dark table-striped'>
           <thead>
             <tr>`;
-      console.log(table)
+      console.log(Table)
       Object.keys(response.data.result[0]).forEach(function (key) {
-        table += `
+        Table += `
               <th scope='col'>${key}</th>`;
       });
-      table += `
+      Table += `
           </thead>
           <tbody>`;
       for (let i = 0; i < response.data.result.length; i++) {
-        table += `
+        Table += `
             <tr>`;
         var List = Object.values(response.data.result[i]);
         for (let j = 0; j < List.length; j++) {
-          table += `
+          Table += `
               <td>${List[j]}</td>`;
         }
-        table += `
+        Table += `
             </tr>`;
       }
-      table += `
+      Table += `
           </tbody>
         </table>`;
-      console.log(table);
-      document.getElementById("displayResult").innerHTML = table;
+      console.log(Table);
+      document.getElementById("displayResult").innerHTML = Table;
       document.getElementById('header').innerText='Transactions'
     } catch (error) {
       console.error(error);
@@ -157,14 +157,6 @@ const Home = () => {
                       <span>Show transaction</span>
                     </button>
                   </div>
-                  {/* <div className="mb-3 d-grid">
-                    <button
-                      className="btn btn-primary"
-                      onClick={getTransactions}
-                    >
-                      <span>Show transaction</span>
-                    </button>
-                  </div> */}
                   <div className="mb-3 d-grid">
                     <button
                       className="btn btn-primary"
@@ -173,28 +165,13 @@ const Home = () => {
                       <span>Get Exchange Rate</span>
                     </button>
                   </div>
-                  {/* <div className="mb-3 d-grid">
-                    <button
-                      className="btn btn-primary"
-                      onClick={getTransactions}
-                    >
-                      <span>Show transaction</span>
-                    </button>
-                  </div> */}
 
                   <div className="mb-3 d-grid">
                     <button className="btn btn-primary" onClick={createNewUser}>
                       <span>Create New User</span>
                     </button>
                   </div>
-                  {/* <div className="mb-3 d-grid">
-                    <button
-                      className="btn btn-primary"
-                      onClick={getTransactions}
-                    >
-                      <span>Show transaction</span>
-                    </button>
-                  </div> */}
+
                   <div className="mb-3 d-grid">
                     <button className="btn btn-primary" onClick={deleteUser}>
                       <span>Delete User</span>
@@ -217,14 +194,7 @@ const Home = () => {
             <div class="card">
               <h5 class="card-header" id='header'>Featured</h5>
               <div class="card-body" id='displayResult'>
-                {/* <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-                <a href="#" class="btn btn-primary">
-                  Go somewhere
-                </a> */}
+
               </div>
             </div>
           </div>
