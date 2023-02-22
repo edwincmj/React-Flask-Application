@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from utils.dbConfig import db
 from models.db_models import User
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, decode_token
 import json
 
 
@@ -48,6 +48,8 @@ def login():
 
         additional_claims = {"id": existingUser.id,
                             "name": existingUser.name, "username": existingUser.username}
+        
+        print(additional_claims)
 
         access_token = create_access_token(
             identity=existingUser.id, additional_claims=additional_claims)
@@ -65,3 +67,40 @@ def login():
                 "message": "Server Error"
             }
         ), 500
+
+def protected():
+    try:
+        bearer = request.headers.get('Authorization',None)
+        print(bearer)
+        token = bearer.split()[1]
+        if not token:
+            return jsonify(
+                {
+                    "code":404,
+                    "message":"No token in request"
+                }
+            )
+        try:
+            user = decode_token(token, allow_expired=True)
+        except Exception as e:
+            return jsonify(
+                {
+                    "code":404,
+                    "message":"Incorrect token"
+                }
+            ),404
+        print(user['id'])
+        print(user['username'])
+        return jsonify(
+            {
+                "code":200,
+                "message":"OK"
+            }
+        ),200
+    except Exception as e:
+        return jsonify(
+            {
+                "code":500,
+                "message":e
+            }
+        )
