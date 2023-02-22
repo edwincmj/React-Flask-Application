@@ -21,7 +21,7 @@ function App() {
     // }, [location.pathname]);
 
     return (
-        <AuthContextProvider>
+        // <AuthContextProvider>
             <div className={`App ${theme ? 'background-image' : 'background-lightBlue'}`} style={{ minHeight: "100vh" }}>
                 <Header />                    
                 <Routes>
@@ -30,7 +30,7 @@ function App() {
                     <Route path="/test" element={<Test />} />
                 </Routes>
             </div>
-        </AuthContextProvider>
+        // </AuthContextProvider> 
     );
 }
 
