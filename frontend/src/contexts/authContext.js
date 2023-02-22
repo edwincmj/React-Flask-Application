@@ -8,6 +8,7 @@ import jwt_decode from "jwt-decode";
 import React from "react";
 import axios from "axios";
 import hosturl from "../hosturl.js"
+import {Navigate} from "react-router-dom"
 const API_URL = hosturl+"/auth/";
 
 export const AuthContext = createContext();
@@ -47,10 +48,11 @@ const AuthContextProvider = (props) => {
       };
 
     return (
-        <AuthContext.Provider value={{ user ,login,logout }}>
-            {user ? props.children : props.children}
+        <AuthContext.Provider value={{ user ,login,logout }} >
+            {/* {user ? props.children : props.children} */}
             {/* {user ? props.children : null} */}
             {/* {props.children} */}
+            {user ? props.children : props.children}
         </AuthContext.Provider>
     );
 };
