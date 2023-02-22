@@ -22,6 +22,18 @@ const Home = () => {
   }, []);
 
   //post request
+  // if user is logged in, get token and set authorization headers with token.
+  // This is to call protected API endpoint that requires user authentication
+  // var config = {}
+  // if(auth.user !== null){
+  //     const bearer_token = `Bearer ${auth.user.token}`
+  //     config = {
+  //         headers:{
+  //             Authorization: bearer_token
+  //         }
+  //       };
+
+  // }
   async function getTransactions() {
     try {
       const response = await axios.post(hosturl + "/transaction/user", {
@@ -32,6 +44,7 @@ const Home = () => {
         <table className='table table-sm table-dark table-striped'>
           <thead>
             <tr>`;
+      console.log(table)
       Object.keys(response.data.result[0]).forEach(function (key) {
         table += `
               <th scope='col'>${key}</th>`;
