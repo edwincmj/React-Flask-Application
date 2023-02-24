@@ -7,6 +7,7 @@ verify_ssl = true
 
 [packages]
 flask = "*"
+sqlalchemy = "*"
 flask-sqlalchemy = "*"
 flask-cors = "*"
 Flask-JWT-Extended = "*"
@@ -15,11 +16,9 @@ flask-sqlacodegen = "*"
 mysqlclient = "*"
 pyenv-win = "*"
 mysql-connector-python = "*"
-python-dotenv = "*"
-sqlalchemy = "*"
 
 [requires]
-python_version = "3.9.6"
+python_version = "3.8"
 
 [scripts]
 start="flask --debug --app application.py run -p 5000 -h 0.0.0.0"

@@ -3,10 +3,11 @@ import React from "react";
 import axios from "axios";
 import hosturl from "../hosturl.js";
 import { useAuth } from "../contexts/authContext.js";
-import { Navigate } from "react-router-dom";
+import { Navigate, redirect, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 const Home = () => {
   const auth = useAuth();
+  const navigate = useNavigate()
   const [config, setConfig] = useState({});
   const [transactionForm,setTransactionForm] = useState(false);
   const [debitCurrency, setDebitCurrency] = useState(0)
@@ -159,6 +160,10 @@ const Home = () => {
     }
   }
 
+  const redirectTransaction = () =>{
+    navigate('/transaction')
+  }
+
   // if user is logged in, get token and set authorization headers with token.
   // This is to call protected API endpoint that requires user authentication
   // var config = {}
@@ -198,9 +203,9 @@ const Home = () => {
                   <div className="mb-3 d-grid">
                     <button
                       className="btn btn-primary"
-                      onClick={getTransactions}
+                      onClick={redirectTransaction}
                     >
-                      <span>Show transactions</span>
+                      <span>Transaction</span>
                     </button>
                   </div>
                   <div className="mb-3 d-grid">
@@ -249,42 +254,6 @@ const Home = () => {
                     </button>
                   </div> */}
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="container">
-            <div className="card w-auto scroll">
-              <h5 className="card-header w-auto" id='header'>Featured</h5>
-              <div className="card-body" id='displayResult'>
-              {transactionForm ? (
-                    <div>
-                      <form>
-                      <div className="form-row">
-                          <div className="form-group col-md-6">
-                            <label className='text-left'>Debit Currency</label>
-                            <select id="inputDebitCurrency" className="form-control" value={debitCurrency} onChange={e => setDebitCurrency(e.target.value)}>
-                            </select>
-                          </div>
-                          <div className="form-group col-md-6">
-                            <label  className='text-left'>Debit Amount</label>
-                            <input type="number" className="form-control" id="debitAmount" onChange={e => calculateCreditAmount(e.target.value)} />
-                          </div>
-                        </div>
-                        <div className="form-group col-md-6">
-                          <label >Credit Currency</label>
-                          <select id="inputCreditCurrency" className="form-control" onChange={e => setCreditCurrency(e.target.value)}>
-                          </select>
-                        </div>
-                        <div className="form-group col-md-6">
-                          <label >Credit Amount</label>
-                          <input type="text"  className='form-control' readOnly value={creditAmount} onChange={e => setCreditAmount(e.target.value)} />
-                        </div>
-                        <button type="submit" className="btn btn-primary">Create Transaction</button>
-                      </form>
-                    </div>
-                  )
-                    :(<div></div>)
-                  }
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Test from "./pages/Test"
 import Header from "./components/Header";
 import AuthContextProvider from "./contexts/authContext";
+import Transaction from "./pages/Transaction";
 function App() {
 
     const [theme, setTheme] = useState(false);
@@ -28,6 +29,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/test" element={<Test />} />
+                    <Route path='/transaction' element={<Transaction/>}/>
                 </Routes>
             </div>
         // </AuthContextProvider> 
