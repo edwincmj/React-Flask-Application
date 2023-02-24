@@ -2,15 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 // import AuthService from "../services/auth.service";
 
-import { useAuth } from "../contexts/authContext";
+// import { useAuth } from "../contexts/authContext";
 import Logo from "../assets/Logo.png";
 
 const Header = () => {
   
-  const auth = useAuth(); 
+  // const auth = useAuth(); 
 
   const logOut = () => {
-    auth.logout(); 
+    // auth.logout(); 
   };
 
   return (
@@ -42,20 +42,20 @@ const Header = () => {
             </li>
           )} */}
 
-          {auth.user && (
+          {/* {auth.user && ( */}
             <li className="nav-item">
               <Link to={"/user"} className="nav-link">
                 User
               </Link>
             </li>
-          )}
+          {/* )} */}
         </div>
 
-        {auth.user ? (
+        {/* {auth.user ? ( */}
           <div className="navbar-nav ms-auto">
             <li className="nav-item">
               <Link to={"/profile"} className="nav-link">
-                {auth.user.info.username}
+                {/* {auth.user.info.username} */}
               </Link>
             </li>
             <li className="nav-item">
@@ -64,7 +64,7 @@ const Header = () => {
               </Link>
             </li>
           </div>
-        ) : (
+        {/* ) : ( */}
           <div className="navbar-nav ms-auto">
             <li className="nav-item">
               <Link to={"/login"} className="nav-link">
@@ -78,7 +78,7 @@ const Header = () => {
               </Link>
             </li> */}
           </div>
-        )}
+        {/* )} */}
       </nav>
   )
 }

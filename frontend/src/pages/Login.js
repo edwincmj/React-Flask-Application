@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import AuthService from "../services/auth.service";
 import Logo from "../assets/Logo.png";
-import { useAuth } from "../contexts/authContext";
+// import { useAuth } from "../contexts/authContext";
 import { Navigate } from "react-router-dom";
 const Login = () => {
     let navigate = useNavigate();
-    const auth = useAuth(); 
+    // const auth = useAuth(); 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -25,32 +25,32 @@ const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault();
 
-        setMessage("");
-        setLoading(true);
+    //     setMessage("");
+    //     setLoading(true);
 
-       auth.login(username, password).then(
-            () => {
-                navigate("/");
-                // window.location.reload();
-            },
-            (error) => {
-                const resMessage =
-                    (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                    error.message ||
-                    error.toString();
+    //    auth.login(username, password).then(
+    //         () => {
+    //             navigate("/");
+    //             // window.location.reload();
+    //         },
+    //         (error) => {
+    //             const resMessage =
+    //                 (error.response &&
+    //                     error.response.data &&
+    //                     error.response.data.message) ||
+    //                 error.message ||
+    //                 error.toString();
 
-                setLoading(false);
-                setMessage(resMessage);
-            }
-        );
+    //             setLoading(false);
+    //             setMessage(resMessage);
+    //         }
+    //     );
     };
 
     return (
         <>
-        {auth.user ? <Navigate replace to='/'/>
-        :
+        {/* {auth.user ? <Navigate replace to='/'/>
+        : */}
             <div className="container">
                 <div className="row">
                     <div className="col-lg-6"></div>
@@ -112,7 +112,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            }
+            {/* } */}
         </>
     );
 };
